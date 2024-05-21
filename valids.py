@@ -29,7 +29,7 @@ class TypeDictionaryEnum(str, Enum):
     restriction_property_rights = "restriction_property_rights"
     confirmation_document = "confirmation_document"
     category = "category"
-    bank_programs = "bank_programs"
+    bank_programs = "bank-programs"
     building_type = "building_type"
 
 
@@ -406,7 +406,7 @@ class UnderDocsInfoValidator(BaseModel):
 # Валидатор для /to_underwriter
 class ToUnderwriterValidator(BaseModel):
     ipoteka_uuid: str
-    message: Optional[str] = None
+    message: str = ''
     
     
 # Валидатор для /dictionary

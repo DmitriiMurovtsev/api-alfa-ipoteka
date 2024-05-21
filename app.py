@@ -100,7 +100,7 @@ def validation_of_input_data(request, pydantic_validation_class, form_json=None)
         
         return False, None, validation_error
     
-    return True, json_data, None
+    return True, json.loads(json_data), None
 
 
 # для логирования и обработки непредвиденных ошибок
@@ -110,13 +110,25 @@ def request_response_logging(f):
         
         start_time = time.time()
         
-        params = request.values.to_dict()
-        if params.get('auth'):
-            params['auth'] = {"login": "******", "password": "******"}
+        params_data = request.values.to_dict()
+        params_json = json.loads(request.get_json())
+        params_files = request.files        
+        
+        if 'auth' in params_data:
+            params_data['auth'] = {"login": "******", "password": "******"}
+        if 'auth' in params_json:
+            params_json['auth'] = {"login": "******", "password": "******"}            
         
         try:
-            result, code_ = f(*args, **kwargs)
+            response = f(*args, **kwargs)
             
+            if isinstance(response, tuple):
+                result, code_ = f(*args, **kwargs)
+                
+            else:
+                result = response
+                code_ = response.status_code
+                
             log_ = {
                 "date_request": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
                 "method": f.__name__,
@@ -124,7 +136,9 @@ def request_response_logging(f):
                 "status": "Успешно" if code_ in [200, 202] else "Не успешно",
                 "status_code": code_,
                 "ip": request.remote_addr,
-                "parameters": params,
+                "data": params_data,
+                "json": params_json,
+                "files": params_files,
                 "response": result.get_json(),
             }
             
@@ -155,7 +169,9 @@ def request_response_logging(f):
                 "status": "Не успешно",
                 "status_code": 500,
                 "ip": request.remote_addr,
-                "parameters": params,
+                "data": params_data,
+                "json": params_json,
+                "files": params_files,
                 "response": unknown_errors,
             }     
             
@@ -164,6 +180,12 @@ def request_response_logging(f):
             return jsonify(unknown_errors), 500
     
     return check
+
+
+# удаляет данные auth из полученного json
+def get_auth(json_data):
+    auth = json_data.pop('auth')    
+    return json_data, auth['login'], auth['password']
 
 
 # Предварительный расчет котировки Ипотеки
@@ -175,9 +197,8 @@ def estimation():
     if not is_valid:        
         return jsonify(errors), 400
     
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]
-        
+    request_data, login, password = get_auth(request_data)
+            
     response = requests.post(f"{link_api}/estimation", auth=HTTPDigestAuth(login, password), json=request_data)
     
     response_data, status_code = handle_response_errors(response, [400, 403, 500])    
@@ -194,8 +215,7 @@ def calculation():
     if not is_valid:
         return jsonify(errors), 400
     
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.post(f"{link_api}/calculation", auth=HTTPDigestAuth(login, password), json=request_data)
       
@@ -215,8 +235,8 @@ def create_contract():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)  
     
     response = requests.post(f"{link_api}/contract/{ipoteka_uuid}", auth=HTTPDigestAuth(login, password))    
     
@@ -235,8 +255,8 @@ def get_contract():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.get(f"{link_api}/contract/{ipoteka_uuid}", auth=HTTPDigestAuth(login, password))
     
@@ -256,8 +276,8 @@ def get_group_contract():
         return jsonify(errors), 400    
     
     group_id = request_data["group_id"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.get(f"{link_api}/contract/group/{group_id}", auth=HTTPDigestAuth(login, password))
     
@@ -276,8 +296,8 @@ def printforms():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.get(f"{link_api}/printforms/{ipoteka_uuid}", auth=HTTPDigestAuth(login, password))
 
@@ -298,8 +318,8 @@ def get_printform():
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
     form_id = request_data["form_id"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.get(f"{link_api}/printform/{ipoteka_uuid}/form/{form_id}/", auth=HTTPDigestAuth(login, password))
         
@@ -327,8 +347,8 @@ def payment():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data) 
     
     response = requests.post(f"{link_api}/payment/{ipoteka_uuid}", auth=HTTPDigestAuth(login, password), json=request_data)
     
@@ -347,8 +367,8 @@ def files():
         return jsonify(errors), 400
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)  
         
     response = requests.get(f"{link_api}/files/{ipoteka_uuid}", auth=HTTPDigestAuth(login, password))
         
@@ -414,8 +434,8 @@ def get_file():
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
     file_id = request_data["file_id"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)   
         
     response = requests.get(
         f"{link_api}/files/{ipoteka_uuid}/file/{file_id}/",
@@ -445,8 +465,8 @@ def under_docs_info():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]    
+    
+    request_data, login, password = get_auth(request_data)
     
     response = requests.get(
         f"{link_api}/files/{ipoteka_uuid}/underwriting-required-documents-info",
@@ -468,12 +488,12 @@ def to_underwriter():
         return jsonify(errors), 400    
     
     ipoteka_uuid = request_data["ipoteka_uuid"]
-    message = request_data.get("message")
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]
+    message = request_data["message"]
+    
+    request_data, login, password = get_auth(request_data)
     
     data = {
-        "message": message if message else '',
+        "message": message,
     }
     
     response = requests.post(
@@ -485,6 +505,30 @@ def to_underwriter():
     response_data, status_code = handle_response_errors(response, [400, 403, 404, 500])
     
     return jsonify(response_data), status_code    
+
+
+# Справочники
+@app.route("/dictionary", methods=["POST"])
+@request_response_logging
+def dictionary():
+    
+    is_valid, request_data, errors = validation_of_input_data(request, DictionaryValidator)
+    if not is_valid:
+        return jsonify(errors), 400    
+    
+    type_dictionary = request_data["type"]
+    
+    request_data, login, password = get_auth(request_data)    
+    
+    link = f"{link_api}/dictionary/{type_dictionary}"
+    if type_dictionary != "bank-programs":
+        link += "/names"
+        
+    response = requests.get(link, auth=HTTPDigestAuth(login, password))
+    
+    response_data, status_code = handle_response_errors(response, [400, 404, 500])
+    
+    return jsonify(response_data), status_code
 
 
 # Получение ссылки на страницу лендинга. (Требуется оформление дополнительного доступа через куратора)
@@ -501,31 +545,7 @@ def landing_offer():
             }
         ],
         "timestamp": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    }), 501
-
-
-# Справочники
-@app.route("/dictionary", methods=["POST"])
-@request_response_logging
-def dictionary():
-    
-    is_valid, request_data, errors = validation_of_input_data(request, DictionaryValidator)
-    if not is_valid:
-        return jsonify(errors), 400    
-    
-    login = request_data["auth"]["login"]
-    password = request_data["auth"]["password"]
-    type_dictionary = request_data["type"]
-    
-    link = f"{link_api}/dictionary/{type_dictionary}/names"
-    if type_dictionary != "bank-programs":
-        link += "/names"
-        
-    response = requests.get(link, auth=HTTPDigestAuth(login, password))
-    
-    response_data, status_code = handle_response_errors(response, [400, 404, 500])
-    
-    return jsonify(response_data), status_code
+    }), 200
 
 
 if __name__ == "__main__":
