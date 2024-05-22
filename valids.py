@@ -122,11 +122,11 @@ class MortgageAgreementFull(BaseModel):
 
 # Блок данных по риску LIFE
 class LifeRisk(BaseModel):
-    health: Optional[str] = None
-    profession: Optional[str] = None
-    seller_discount: Optional[str] = None
-    share: Optional[float] = 100.00
-    sport: Optional[str] = None
+    health: str
+    profession: str
+    seller_discount: str
+    share: float = 100.00
+    sport: str
     
 
 # Блок данных по риску PROPERTY
@@ -165,11 +165,11 @@ class TitleRisk(BaseModel):
 # Данные паспорта
 class Passport(BaseModel):
     issue_unit_code: Optional[str] = None
-    issue_date: Optional[str] = None
-    issue_place: Optional[str] = None
-    number: Optional[str] = Field(None, min_length=6, max_length=6, pattern=r'^[0-9]+$')
-    reg_address: Optional[AddressFull] = None
-    series: Optional[str] = Field(None, min_length=4, max_length=4, pattern=r'^[0-9]+$')
+    issue_date: str
+    issue_place: str
+    number: str = Field(None, min_length=6, max_length=6, pattern=r'^[0-9]+$')
+    reg_address: AddressFull
+    series: str = Field(None, min_length=4, max_length=4, pattern=r'^[0-9]+$')
     
     @field_validator('issue_date')
     def check_issue_date_format(cls, v):
@@ -209,15 +209,15 @@ class Insurer(BaseModel):
 
 # Блок данных заемщика полный
 class InsurerFull(Insurer):
-    birth_date: Optional[str] = None
-    email: Optional[str] = None
-    fact_address: Optional[AddressFull] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    life_risk: Optional[LifeRisk] = None
+    birth_date: str
+    email: str
+    fact_address: AddressFull
+    first_name: str
+    last_name: str
+    life_risk: LifeRisk
     middle_name: Optional[str] = None
-    passport: Optional[Passport] = None
-    phone_number: Optional[str] = None
+    passport: Passport
+    phone_number: str
     resident: Optional[bool] = None
     sex: SexEnum
     snils: Optional[str] = None
@@ -264,7 +264,7 @@ class InsuranceObjectFull(BaseModel):
     primary_sale: bool = None
     property_risk: PropertyRisk
     title_risk: Optional[TitleRisk] = None
-    type: Optional[TypeObjEnum] = None
+    type: TypeObjEnum
     
 
 # Блок данных Контакты клиента
@@ -317,6 +317,14 @@ class CalculationValidator(BaseModel):
     risk_types: List[RiskTypes]
     sign_date: str
     kv_discount: Optional[float] = None
+    
+    @field_validator('kv_discount')
+    def check_kv_discount(cls, v: float) -> float:
+        if v >= 1:
+            raise ValueError("kv_discount не может быть больше или равно 1. Если скидки нет - поле передавать не нужно")
+        
+        else:
+            return v
     
     @field_validator('begin_date', 'end_date', 'sign_date')
     def check_birth_date_format(cls, v: str) -> str:

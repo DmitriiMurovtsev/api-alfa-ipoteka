@@ -91,17 +91,17 @@ def test_calculation():
                 "name": "Квартира",
                 "primary_sale": False,
                 "property_risk": {
-                    # "address": "г Волгоград, пр-кт им. В.И. Ленина, д 72б, кв 1",
+                    "address": "г Волгоград, пр-кт им. В.И. Ленина, д 72б, кв 1",
                     "construction_year": 2020,
                     "flammable": False,
-                    # "building_type": "Комбинированный",
-                    # "kad_number": "34:34:040010:1156",
-                    # "land_category": "Земли нас.пунктов (поселений)",
-                    # "market_price": 3200000,
+                    "building_type": "Комбинированный",
+                    "kad_number": "34:34:040010:1156",
+                    "land_category": "Земли нас.пунктов (поселений)",
+                    "market_price": 3200000,
                     "property_area": 35.5,
                     "renovation_work": False,
-                    # "seller_discount": "1",
-                    # "swimming_pool": False,
+                    "seller_discount": "1",
+                    "swimming_pool": False,
                     "total_renovation_work": False,
                 },
                 "title_risk": {
@@ -169,13 +169,13 @@ def test_calculation():
             "rate": "3.9",
             "term_in_month": 12,
         },
-        # "prev_insurance_company": "ИНГОССТРАХ",   - приводит к невалидным данным?
-        # "previous_number": "554477",              - приводит к невалидным данным?
+        "prev_insurance_company": "ИНГОССТРАХ",   
+        # "previous_number": "554477",              
         "risk_types": [
             "LIFE", "PROPERTY",
         ],
         "sign_date": "2024-06-01",
-        "kv_discount": 0.95,
+        "kv_discount": 0.99,
     }
     
     response = client.post(

@@ -100,34 +100,34 @@
     "begin_date": str,                  # *Дата начала действия, формат YYYY-MM-DD
     "co_insurers": [                    # Блок созаемщики. Возможно наличие до 3-х созаемщиков
         {
-            "birth_date": str,          # Дата рождения, формат YYYY-MM-DD
-            "email": str,               # Email
-            "fact_address": {           # Фактический адрес проживания
+            "birth_date": str,          # *Дата рождения, формат YYYY-MM-DD
+            "email": str,               # *Email
+            "fact_address": {           # *Фактический адрес проживания
                 "fias_id": str,         # Код ФИАС
                 "text": str,            # *Адрес одной строкой
             },
-            "first_name": str,          # Имя
-            "last_name": str,           # Фамилия
-            "life_risk": {              # Блок данных по риску LIFE
-                "health": str,              # Категория здоровья согласно справочника
-                "profession": str,          # Категория профессии согласно справочника
-                "seller_discount": str,     # Коэффициент агента
-                "share": float,             # Доля. По дефолту передавать 100
-                "sport": str,               # Категория спорта согласно справочника
+            "first_name": str,          # *Имя
+            "last_name": str,           # *Фамилия
+            "life_risk": {              # *Блок данных по риску LIFE
+                "health": str,              # *Категория здоровья согласно справочника
+                "profession": str,          # *Категория профессии согласно справочника
+                "seller_discount": str,     # *Коэффициент агента
+                "share": float,             # *Доля. По дефолту передавать 100
+                "sport": str,               # *Категория спорта согласно справочника
             },
             "middle_name": str,             # Отчество
-            "passport": {                   # Данные паспорта
+            "passport": {                   # *Данные паспорта
                 "issue_unit_code": str,     # Код подразделения
-                "issue_date": str,          # Дата выдачи паспорта, формат YYYY-MM-DD
-                "issue_place": str,         # Место выдачи паспорта
-                "number": str,              # Номер паспорта
-                "reg_address": {            # Адрес проживания по месту регистрации
+                "issue_date": str,          # *Дата выдачи паспорта, формат YYYY-MM-DD
+                "issue_place": str,         # *Место выдачи паспорта
+                "number": str,              # *Номер паспорта
+                "reg_address": {            # *Адрес проживания по месту регистрации
                     "fias_id": str,         # Код ФИАС
                     "text": str,            # *Адрес одной строкой
                 },
-                "series": str,              # Серия паспорта
+                "series": str,              # *Серия паспорта
             },
-            "phone_number": str,            # Номер телефона
+            "phone_number": str,            # *Номер телефона
             "resident": bool,               # Гражданство РФ
             "sex": str,                     # *Пол, возможны MALE, FEMALE
             "snils": str,                   # СНИЛС
@@ -171,39 +171,39 @@
                 "spouse_approval": bool,            # Признак отсутствия согласия супруга/супруги
                 "term_in_month": int,               # Срок страхования в месяцах
             },
-            "type": str,                            # Тип объекта
+            "type": str,                            # *Тип объекта
         },
     ],
     "insurance_program": str,               # *Программа страхования согласно справочника
     "insurer": {                            # *Заемщик
-        "birth_date": str,                  # Дата рождения, формат YYYY-MM-DD
-        "email": str,                       # Email
-        "fact_address": {                   # Фактический адрес проживания
+        "birth_date": str,                  # *Дата рождения, формат YYYY-MM-DD
+        "email": str,                       # *Email
+        "fact_address": {                   # *Фактический адрес проживания
             "fias_id": str,                 # Код ФИАС
             "text": str,                    # *Адрес одной строкой
         },
-        "first_name": str,                  # Имя
-        "last_name": str,                   # Фамилия
-        "life_risk": {                      # Блок данных по риску LIFE
-            "health": str,                  # Категория здоровья согласно справочника
-            "profession": str,              # Категория профессии согласно справочника
-            "seller_discount": str,         # Коэффициент агента	
-            "share": float,                 # Доля. По дефолту передавать 100
-            "sport": str,                   # Категория спорта согласно справочника
+        "first_name": str,                  # *Имя
+        "last_name": str,                   # *Фамилия
+        "life_risk": {                      # *Блок данных по риску LIFE
+            "health": str,                  # *Категория здоровья согласно справочника
+            "profession": str,              # *Категория профессии согласно справочника
+            "seller_discount": str,         # *Коэффициент агента	
+            "share": float,                 # *Доля. По дефолту передавать 100
+            "sport": str,                   # *Категория спорта согласно справочника
         },
         "middle_name": str,                 # Отчество
-        "passport": {                       # Данные паспорта
+        "passport": {                       # *Данные паспорта
             "issue_unit_code": str,         # Код подразделения
-            "issue_date": str,              # Дата выдачи паспорта, формат YYYY-MM-DD
-            "issue_place": str,             # Место выдачи паспорта
-            "number": str,                  # Номер паспорта
-            "reg_address": {                # Адрес проживания по месту регистрации
+            "issue_date": str,              # *Дата выдачи паспорта, формат YYYY-MM-DD
+            "issue_place": str,             # *Место выдачи паспорта
+            "number": str,                  # *Номер паспорта
+            "reg_address": {                # *Адрес проживания по месту регистрации
                 "fias_id": str,             # Код ФИАС
                 "text": str,                # *Адрес одной строкой
             },
-            "series": str,                  # Серия паспорта
+            "series": str,                  # *Серия паспорта
         },
-        "phone_number": str,                # Номер телефона
+        "phone_number": str,                # *Номер телефона
         "resident": bool,                   # Гражданство РФ
         "sex": str,                         # *Пол
         "snils": str,                       # СНИЛС
@@ -211,7 +211,7 @@
     "mortgage_agreement": {                 # *Данные кредита
         "amount": float,                    # Сумма кредита
         "bank": {                           # Данные банка
-            "bic": str,                     # БИК банка
+            "bic": str,                     # *БИК банка
             "name": str,                    # Наименование банка
         },
         "city": str,                        # Город выдачи кредита
@@ -221,7 +221,7 @@
         "term_in_month": int,               # Срок страхования в месяцах
     },
     "prev_insurance_company": str,          # Наименование предыдущей страховой компании
-    "previous_number": str,                 # Предыдущий номер договора (для пролонгации)
+    "previous_number": str,                 # Предыдущий номер договора (только для пролонгации)
     "risk_types": [                         # *Типы рисков к страхованию
         "LIFE",				
     ],
@@ -315,36 +315,36 @@
     "begin_date": str,                      # Дата начала действия договора, формат YYYY-MM-DD HH:MM:SS
     "co_insurers": [                        # Блок с данными о созаемщиках
         {
-            "birth_date": str,              # Дата рождения, формат YYYY-MM-DD
-            "email": str,                   # email
-            "fact_address": {               # Данные фактического адреса
-            "fias_id": str,                 # Код ФИАС
-            "text": str                     # Полный адрес
-        },  
-        "first_name": str,                  # Имя
-        "last_name": str,                   # Фамилия
-        "life_risk": {                      # Данные о риске по жизни
-            "health": str,                  # Категория здоровья согласно справочника
-            "profession": str,              # Категория профессии согласно справочника
-            "seller_discount": float,       # Коэффициент агента
-            "share": float,                 # Доля
-            "sport": str,                   # Категория спорта согласно справочника
+            "birth_date": str,              # *Дата рождения, формат YYYY-MM-DD
+            "email": str,                   # *email
+            "fact_address": {               # *Данные фактического адреса
+                "fias_id": str,             # Код ФИАС
+                "text": str                 # *Полный адрес
+            },  
+        "first_name": str,                  # *Имя
+        "last_name": str,                   # *Фамилия
+        "life_risk": {                      # *Данные о риске по жизни
+            "health": str,                  # *Категория здоровья согласно справочника
+            "profession": str,              # *Категория профессии согласно справочника
+            "seller_discount": float,       # *Коэффициент агента
+            "share": float,                 # *Доля
+            "sport": str,                   # *Категория спорта согласно справочника
         },
         "middle_name": str,                 # Отчество
-        "passport": {                       # Данные о паспорте
+        "passport": {                       # *Данные о паспорте
             "issue_code": str,              # Код подразделения
-            "issue_date": str,              # Дата выдачи паспорта, формат YYYY-MM-DD
-            "issue_place": str,             # Кем выдан
-            "number": str,                  # Номер паспорта
-            "reg_address": {                # Данные адреса регистрации
+            "issue_date": str,              # *Дата выдачи паспорта, формат YYYY-MM-DD
+            "issue_place": str,             # *Кем выдан
+            "number": str,                  # *Номер паспорта
+            "reg_address": {                # *Данные адреса регистрации
                 "fias_id": str,             # Код ФИАС
                 "text": str,                # *Полный адрес
             },
-            "series": str,                  # Серия паспорта
+            "series": str,                  # *Серия паспорта
         },
-        "phone_number": str,                # Номер телефона
+        "phone_number": str,                # *Номер телефона
         "resident": bool,                   # Резидент РФ
-        "sex": str,                         # Пол
+        "sex": str,                         # *Пол
         "snils": str,                       # СНИЛС
         },
     ],
@@ -399,42 +399,42 @@
                 "spouse_approval": bool,            # Признак отсутствия согласия супруга/супруги
                 "term_in_month": int,               # Срок страхования в месяцах
             },
-            "type": str,                            # Тип объекта
+            "type": str,                            # *Тип объекта
         },
     ],
     "insurance_program": str,           # Программа страхования
     "insurance_sum": float,             # Страховая сумма
     "insurer": {                        # Данные о заемщике
-        "birth_date": str,              # Дата рождения, формат YYYY-MM-DD
-        "email": str,                   # Email
-        "fact_address": {               # Данные фактического адреса
+        "birth_date": str,              # *Дата рождения, формат YYYY-MM-DD
+        "email": str,                   # *Email
+        "fact_address": {               # *Данные фактического адреса
             "fias_id": str,             # Код ФИАС
             "text": str,                # *Полный адрес
         },
-        "first_name": str,              # Имя
-        "last_name": str,               # Фамилия
-        "life_risk": {                  # Данные о риске по жизни
-            "health": str,              # Категория здоровья согласно справочника
-            "profession": str,          # Категория профессии согласно справочника
-            "seller_discount": float    # Коэффициент агента
-            "share": float,             # Доля
-            "sport": str,               # Категория спорта согласно справочника
+        "first_name": str,              # *Имя
+        "last_name": str,               # *Фамилия
+        "life_risk": {                  # *Данные о риске по жизни
+            "health": str,              # *Категория здоровья согласно справочника
+            "profession": str,          # *Категория профессии согласно справочника
+            "seller_discount": float    # *Коэффициент агента
+            "share": float,             # *Доля
+            "sport": str,               # *Категория спорта согласно справочника
         },
         "middle_name": str,             # Отчество
-        "passport": {                   # Данные о паспорте
+        "passport": {                   # *Данные о паспорте
             "issue_code": str,          # Код подразделения
-            "issue_date": str,          # Дата выдачи паспорта	
-            "issue_place": str,         # Кем выдан
-            "number": str,              # Номер паспорта
-            "reg_address": {            # Данные адреса регистрации
+            "issue_date": str,          # *Дата выдачи паспорта	
+            "issue_place": str,         # *Кем выдан
+            "number": str,              # *Номер паспорта
+            "reg_address": {            # *Данные адреса регистрации
                 "fias_id": str,         # Код ФИАС
                 "text": str,            # *Полный адрес
             },
-            "series": str,              # Серия паспорта
+            "series": str,              # *Серия паспорта
         },
-        "phone_number": str,            # Номер телефона
+        "phone_number": str,            # *Номер телефона
         "resident": bool,               # Резидент РФ
-        "sex": str,                     # Пол
+        "sex": str,                     # *Пол
         "snils": str,                   # СНИЛС
     },
     "ipoteka_uuid": str,                # Универсальный идентификатор договора страхования ипотеки
