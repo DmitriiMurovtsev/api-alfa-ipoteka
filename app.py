@@ -58,13 +58,25 @@ def handle_response_errors(response, good_errors):
             "timestamp": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
         }
         
-    else:
+    elif response.status_code == 502:
         response_data = {
-            "info": "Неизвестная ошибка от внешнего api",
+            "info": "Сервер АльфаСтрахования не отвечает",
             "session_id": None,
             "sub_errors": [
                 {
-                    "message": "Неизвестная ошибка от внешнего api"
+                    "message": "Сервер АльфаСтрахования не отвечает"
+                }
+            ],
+            "timestamp": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        }        
+        
+    else:
+        response_data = {
+            "info": "Неизвестная ошибка на сервере АльфаСтрахования",
+            "session_id": None,
+            "sub_errors": [
+                {
+                    "message": "Неизвестная ошибка на сервере АльфаСтрахования"
                 }
             ],
             "timestamp": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
