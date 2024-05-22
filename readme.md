@@ -4,14 +4,14 @@
 ### 3. Не успешный ответ: 
 ```
 {
-  "info": string,			# Сообщение об ошибке
-  "session_id":string,		# session_id или None
-  "sub_errors": [			
-    {
-      "message": string,	# Подробное сообщение об ошибке
-    },
-  ],
-  "timestamp": string,		# Время ошибки в формате DD-MM-YYYY HH:MM:SS
+    "info": string,           # Сообщение об ошибке
+    "session_id":string,      # session_id или None
+    "sub_errors": [			
+        {
+            "message": string,    # Подробное сообщение об ошибке
+        },
+    ],
+    "timestamp": string,      # Время ошибки в формате DD-MM-YYYY HH:MM:SS
 }
 ```
 # Методы
@@ -489,11 +489,11 @@
 [Наверх](#методы)
 ### Получение печатной формы
 #### Принимает:
+```
 {
     "ipoteka_uuid": string,		    # Универсальный идентификатор договора страхования ипотеки
     "form_id": string,			    # Идентификатор печатной формы
 }
-```
 ```
 #### Успешный ответ:
 ```
