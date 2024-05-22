@@ -67,7 +67,7 @@ class Address(BaseModel):
 # Блок данных Адрес полный
 class AddressFull(BaseModel):
     fias_id: Optional[str] = None
-    text: Optional[str] = None
+    text: str
     
     
 # Объект страхования неполный
@@ -132,16 +132,16 @@ class LifeRisk(BaseModel):
 # Блок данных по риску PROPERTY
 class PropertyRisk(BaseModel):
     address: Optional[str] = None
-    construction_year: Optional[int] = None
-    flammable: Optional[bool] = None
+    construction_year: int
+    flammable: bool
     kad_number: Optional[str] = None
     land_category: Optional[str] = None
     market_price: Optional[float] = None
-    property_area: Optional[float] = None
-    renovation_work: Optional[bool] = None
+    property_area: float
+    renovation_work: bool
     seller_discount: Optional[str] = None
     swimming_pool: Optional[bool] = None
-    total_renovation_work: Optional[bool] = None
+    total_renovation_work: bool
 
 
 # Блок данных по риску TITLE
@@ -261,8 +261,8 @@ class InsurerFull(Insurer):
 class InsuranceObjectFull(BaseModel):
     address: Optional[AddressFull] = None
     name: Optional[str] = None
-    primary_sale: Optional[bool] = None
-    property_risk: Optional[PropertyRisk] = None
+    primary_sale: bool = None
+    property_risk: PropertyRisk
     title_risk: Optional[TitleRisk] = None
     type: Optional[TypeObjEnum] = None
     

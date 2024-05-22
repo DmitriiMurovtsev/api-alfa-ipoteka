@@ -2,16 +2,16 @@
 ### 1. Метод запроса POST
 ### 2. Content-Type: Application/json (кроме “up_files”, там multipart/form-data)
 ### 3. Не успешный ответ: 
-```
+```python
 {
-    "info": string,             # Сообщение об ошибке
-    "session_id":string,        # session_id или None
+    "info": str,                # Сообщение об ошибке
+    "session_id":str,           # session_id или None
     "sub_errors": [			
         {
-            "message": string,  # Подробное сообщение об ошибке
+            "message": str,     # Подробное сообщение об ошибке
         },
     ],
-    "timestamp": string,        # Время ошибки в формате DD-MM-YYYY HH:MM:SS
+    "timestamp": str,           # Время ошибки в формате DD-MM-YYYY HH:MM:SS
 }
 ```
 # Методы
@@ -35,46 +35,46 @@
 [Наверх](#методы)
 ### Предварительный расчет котировки Ипотеки
 #### Принимает:
-```
+```python
 {
     "agent": {                          # Агентский блок
-        "agent_contract_id": integer,   # *Идентификатор агентского договора
-        "department_id": integer,       # *Идентификатор подразделения продавца
+        "agent_contract_id": int,       # *Идентификатор агентского договора
+        "department_id": int,           # *Идентификатор подразделения продавца
     },
     "insuranceCity": {                  # *Регион / Город объекта страхования
-        "fiasId": string,               # *Код ФИАС с детализацией до Города (4-й уровень)
+        "fiasId": str,                  # *Код ФИАС с детализацией до Города (4-й уровень)
     },
     "insurance_objects": [              # *Объекты страхования. Возможно до 2-х объектов
         {
-            "type": string,             # *Тип объекта
+            "type": str,                # *Тип объекта
         }
     ],
     "insurer": {                        # *Заемщик
-        "birth_date": string,           # *Дата рождения, формат YYYY-MM-DD
-        "sex": string,                  # *Пол, возможны MALE, FEMALE
+        "birth_date": str,              # *Дата рождения, формат YYYY-MM-DD
+        "sex": str,                     # *Пол, возможны MALE, FEMALE
     },
     "mortgage_agreement": {             # *Данные по кредиту
         "amount": float,                # *Сумма кредита		
         "bank": {                       # Данные банка из справочника
-            "bic": string,              # *БИК банка
-            "name": string,             # Наименование банка
+            "bic": str,                 # *БИК банка
+            "name": str,                # Наименование банка
         },
         "rate": float,                  # *Процентная ставка, например 8.9
-        "date": string,                 # Дата кредитного договора, формат YYYY-MM-DD
+        "date": str,                    # Дата кредитного договора, формат YYYY-MM-DD
     }
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-    "insurance_program": string,        # Программа страхования
+    "insurance_program": str,           # Программа страхования
     "insurance_sum": float,             # Страховая сумма
     "premium_sum": float,               # Страховая премия общая
     "risks": [                          # Список рисков, до трех
         {
             "insurance_sum": float,     # Страховая сумма
             "premium_sum": float,       # Страховая премия
-            "risk_type": string,        # Тип риска, возможны LIFE, PROPERTY, TITLE
+            "risk_type": str,           # Тип риска, возможны LIFE, PROPERTY, TITLE
         }’
     ],
 }
@@ -84,190 +84,190 @@
 [Наверх](#методы)
 ### Расчет котировки Ипотеки
 #### Принимает:
-```
+```python
 {
     "agent": {                          # Агентский блок
-        "agent_contract_id": integer,   # *Идентификатор агентского договора
-        "channel_sale_id": integer,     # *Идентификатор канала продаж
-        "department_id": integer,       # *Идентификатор подразделения продавца
-        "manager_id": integer,          # *Идентификатор менеджера по договору
-        "signer_id": integer,           # *Идентификатор лица подписавшего договор
+        "agent_contract_id": int,       # *Идентификатор агентского договора
+        "channel_sale_id": int,         # *Идентификатор канала продаж
+        "department_id": int,           # *Идентификатор подразделения продавца
+        "manager_id": int,              # *Идентификатор менеджера по договору
+        "signer_id": int,               # *Идентификатор лица подписавшего договор
     },
-    "agent_email": string,              # *E-mail агента для ответов андеррайтеров
+    "agent_email": str,                 # *E-mail агента для ответов андеррайтеров
     "insuranceCity": {                  # *Регион / Город объекта страхования
-        "fiasId": string,               # *Код ФИАС с детализацией до Города (4-й уровень)
+        "fiasId": str,                  # *Код ФИАС с детализацией до Города (4-й уровень)
     },
-    "begin_date": string,               # *Дата начала действия, формат YYYY-MM-DD
+    "begin_date": str,                  # *Дата начала действия, формат YYYY-MM-DD
     "co_insurers": [                    # Блок созаемщики. Возможно наличие до 3-х созаемщиков
         {
-            "birth_date": string,       # Дата рождения, формат YYYY-MM-DD
-            "email": string,            # Email
+            "birth_date": str,          # Дата рождения, формат YYYY-MM-DD
+            "email": str,               # Email
             "fact_address": {           # Фактический адрес проживания
-                "fias_id": string,      # Код ФИАС
-                "text": string,         # Адрес одной строкой
+                "fias_id": str,         # Код ФИАС
+                "text": str,            # *Адрес одной строкой
             },
-            "first_name": string,       # Имя
-            "last_name": string,        # Фамилия
+            "first_name": str,          # Имя
+            "last_name": str,           # Фамилия
             "life_risk": {              # Блок данных по риску LIFE
-                "health": string,           # Категория здоровья согласно справочника
-                "profession": string,       # Категория профессии согласно справочника
-                "seller_discount": string,  # Коэффициент агента
+                "health": str,              # Категория здоровья согласно справочника
+                "profession": str,          # Категория профессии согласно справочника
+                "seller_discount": str,     # Коэффициент агента
                 "share": float,             # Доля. По дефолту передавать 100
-                "sport": string,            # Категория спорта согласно справочника
+                "sport": str,               # Категория спорта согласно справочника
             },
-            "middle_name": string,          # Отчество
+            "middle_name": str,             # Отчество
             "passport": {                   # Данные паспорта
-                "issue_unit_code": string,  # Код подразделения
-                "issue_date": string,       # Дата выдачи паспорта, формат YYYY-MM-DD
-                "issue_place": string,      # Место выдачи паспорта
-                "number": string,           # Номер паспорта
+                "issue_unit_code": str,     # Код подразделения
+                "issue_date": str,          # Дата выдачи паспорта, формат YYYY-MM-DD
+                "issue_place": str,         # Место выдачи паспорта
+                "number": str,              # Номер паспорта
                 "reg_address": {            # Адрес проживания по месту регистрации
-                    "fias_id": string,      # Код ФИАС
-                    "text": string,         # Адрес одной строкой
+                    "fias_id": str,         # Код ФИАС
+                    "text": str,            # *Адрес одной строкой
                 },
-                "series": string,           # Серия паспорта
+                "series": str,              # Серия паспорта
             },
-            "phone_number": string,         # Номер телефона
-            "resident": boolean,            # Гражданство РФ
-            "sex": string,                  # *Пол, возможны MALE, FEMALE
-            "snils": string,                # СНИЛС
+            "phone_number": str,            # Номер телефона
+            "resident": bool,               # Гражданство РФ
+            "sex": str,                     # *Пол, возможны MALE, FEMALE
+            "snils": str,                   # СНИЛС
         },
     ],
-    "end_date": string,                     # *Дата окончания действия, формат YYYY-MM-DD
+    "end_date": str,                        # *Дата окончания действия, формат YYYY-MM-DD
     "insurance_objects": [                  # *Объекты страхования. Возможно до 2-х объектов
         {
             "address": {                    # Адрес объекта
-                "fias_id": string,          # Код ФИАС
-                "text": string,             # Адрес одной строкой
+                "fias_id": str,             # Код ФИАС
+                "text": str,                # *Адрес одной строкой
             },
-            "name": string,                 # Наименование объекта
-            "primary_sale": boolean,        # Признак первичной недвижимости
-            "property_risk": {              # Риски недвижимости
-                "address": string,              # Адрес
-                "construction_year": integer,   # Год постройки
-                "flammable": boolean,           # Признак наличия огнеопасных материалов
-                "kad_number": string,           # Кадастровый номер
-                "land_category": string,        # Категория земель
-                "market_price": float,          # Рыночная стоимость
-                "property_area": float,         # Площадь
-                "renovation_work": boolean,     # Признак наличия ремонтных работ на данный момент
-                "seller_discount": string,      # Коэффициент продавца
-                "swimming_pool": boolean,           # Признак наличия бассейна
-                "total_renovation_work": boolean,   # Признак наличия капитальный ремонтных работ
+            "name": str,                    # Наименование объекта
+            "primary_sale": bool,           # *Признак первичной недвижимости
+            "property_risk": {              # *Риски недвижимости
+                "address": str,             # Адрес
+                "construction_year": int,   # *Год постройки
+                "flammable": bool,          # *Признак наличия огнеопасных материалов
+                "kad_number": str,          # Кадастровый номер
+                "land_category": str,       # Категория земель
+                "market_price": float,      # Рыночная стоимость
+                "property_area": float,     # *Площадь
+                "renovation_work": bool,    # *Признак наличия ремонтных работ на данный момент
+                "seller_discount": str,     # Коэффициент продавца
+                "swimming_pool": bool,      # Признак наличия бассейна
+                "total_renovation_work": bool,      # *Признак наличия капитальный ремонтных работ
             },
             "title_risk": {                         # Риски страхования TITLE
-                "address": string,                  # Адрес
-                "age_owner": boolean,               # Наличие собственников младше 18 и старше 65 лет
+                "address": str,                     # Адрес
+                "age_owner": bool,                  # Наличие собственников младше 18 и старше 65 лет
                 "insurance_base_amount": float,     # Рыночная стоимость
-                "juridical_owner": boolean,         # Признак наличия юридических лиц в собственниках
-                "kad_number": string,               # Кадастровый номер
-                "land_category": string,            # Категория земель
-                "one_time_payment": boolean,        # Признак единовременной оплаты
-                "ownership_confirmation": string,       # Документ, подтверждающий право собственности
-                "ownership_less_three_years": boolean,  # Наличие в собственности меньше 3 лет
-                "ownership_restriction": string,        # Ограничения на права собственности
-                "procuratory_agreement": boolean,       # Проведение сделки по доверенности
-                "seller_discount": string,              # Коэффициент продавца
-                "spouse_approval": boolean,             # Признак отсутствия согласия супруга/супруги
-                "term_in_month": integer,               # Срок страхования в месяцах
+                "juridical_owner": bool,            # Признак наличия юридических лиц в собственниках
+                "kad_number": str,                  # Кадастровый номер
+                "land_category": str,               # Категория земель
+                "one_time_payment": bool,           # Признак единовременной оплаты
+                "ownership_confirmation": str,      # Документ, подтверждающий право собственности
+                "ownership_less_three_years": bool, # Наличие в собственности меньше 3 лет
+                "ownership_restriction": str,       # Ограничения на права собственности
+                "procuratory_agreement": bool,      # Проведение сделки по доверенности
+                "seller_discount": str,             # Коэффициент продавца
+                "spouse_approval": bool,            # Признак отсутствия согласия супруга/супруги
+                "term_in_month": int,               # Срок страхования в месяцах
             },
-            "type": string,                             # Тип объекта
+            "type": str,                            # Тип объекта
         },
     ],
-    "insurance_program": string,            # *Программа страхования согласно справочника
+    "insurance_program": str,               # *Программа страхования согласно справочника
     "insurer": {                            # *Заемщик
-        "birth_date": string,               # Дата рождения, формат YYYY-MM-DD
-        "email": string,                    # Email
+        "birth_date": str,                  # Дата рождения, формат YYYY-MM-DD
+        "email": str,                       # Email
         "fact_address": {                   # Фактический адрес проживания
-            "fias_id": string,              # Код ФИАС
-            "text": string,                 # Адрес одной строкой
+            "fias_id": str,                 # Код ФИАС
+            "text": str,                    # *Адрес одной строкой
         },
-        "first_name": string,               # Имя
-        "last_name": string,                # Фамилия
+        "first_name": str,                  # Имя
+        "last_name": str,                   # Фамилия
         "life_risk": {                      # Блок данных по риску LIFE
-            "health": string,               # Категория здоровья согласно справочника
-            "profession": string,           # Категория профессии согласно справочника
-            "seller_discount": string,      # Коэффициент агента	
+            "health": str,                  # Категория здоровья согласно справочника
+            "profession": str,              # Категория профессии согласно справочника
+            "seller_discount": str,         # Коэффициент агента	
             "share": float,                 # Доля. По дефолту передавать 100
-            "sport": string,                # Категория спорта согласно справочника
+            "sport": str,                   # Категория спорта согласно справочника
         },
-        "middle_name": string,              # Отчество
+        "middle_name": str,                 # Отчество
         "passport": {                       # Данные паспорта
-            "issue_unit_code": string,      # Код подразделения
-            "issue_date": string,           # Дата выдачи паспорта, формат YYYY-MM-DD
-            "issue_place": string,          # Место выдачи паспорта
-            "number": string,               # Номер паспорта
+            "issue_unit_code": str,         # Код подразделения
+            "issue_date": str,              # Дата выдачи паспорта, формат YYYY-MM-DD
+            "issue_place": str,             # Место выдачи паспорта
+            "number": str,                  # Номер паспорта
             "reg_address": {                # Адрес проживания по месту регистрации
-                "fias_id": string,          # Код ФИАС
-                "text": string,             # Адрес одной строкой
+                "fias_id": str,             # Код ФИАС
+                "text": str,                # *Адрес одной строкой
             },
-            "series": string,               # Серия паспорта
+            "series": str,                  # Серия паспорта
         },
-        "phone_number": string,             # Номер телефона
-        "resident": boolean,                # Гражданство РФ
-        "sex": string,                      # *Пол
-        "snils": string,                    # СНИЛС
+        "phone_number": str,                # Номер телефона
+        "resident": bool,                   # Гражданство РФ
+        "sex": str,                         # *Пол
+        "snils": str,                       # СНИЛС
     },
     "mortgage_agreement": {                 # *Данные кредита
         "amount": float,                    # Сумма кредита
         "bank": {                           # Данные банка
-            "bic": string,                  # БИК банка
-            "name": string,                 # Наименование банка
+            "bic": str,                     # БИК банка
+            "name": str,                    # Наименование банка
         },
-        "city": string,                     # Город выдачи кредита
-        "date": string,                     # *Дата кредитного договора, формат YYYY-MM-DD
-        "number": string,                   # Номер кредитного договора
+        "city": str,                        # Город выдачи кредита
+        "date": str,                        # *Дата кредитного договора, формат YYYY-MM-DD
+        "number": str,                      # Номер кредитного договора
         "rate": float,                      # Процентная ставка, например 8.9
-        "term_in_month": integer,           # Срок страхования в месяцах
+        "term_in_month": int,               # Срок страхования в месяцах
     },
-    "prev_insurance_company": string,       # Наименование предыдущей страховой компании
-    "previous_number": string,              # Предыдущий номер договора (для пролонгации)
+    "prev_insurance_company": str,          # Наименование предыдущей страховой компании
+    "previous_number": str,                 # Предыдущий номер договора (для пролонгации)
     "risk_types": [                         # *Типы рисков к страхованию
         "LIFE",				
     ],
-    "sign_date": string,                    # *Дата оформления, формат YYYY-MM-DD
+    "sign_date": str,                       # *Дата оформления, формат YYYY-MM-DD
     "kv_discount": float,                   # Коэффициент скидки за счёт КВ, например 0.9
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-    "begin_date": string,               # *Дата начала действия, формат YYYY-MM-DD
-    "declaration": boolean,             # Признак декларации
-    "end_date": string,                 # *Дата окончания действия, формат YYYY-MM-DD
-    "insurance_program": string,        # Программа страхования
-    "insurance_sum": float,             # Страховая сумма
-    "ipoteka_uuid": string,             # Универсальный идентификатор договора страхования ипотеки
-    "group_id": integer,                # Идентификатор группы связанных договоров
-    "no_paper_offer_sent": boolean,     # Признак успешной отправки предложения ББ
-    "number": string,                   # Номер договора
-    "offer": boolean,                   # Признак оферты
-    "premium_sum": float,               # Сумма премии
-    "prev_insurance_company": string,   # Наименование предыдущей страховой компании
-    "previous_number": string,          # Предыдущий номер договора
-    "risks": [                          # Информация по рискам
+    "begin_date": str,              # *Дата начала действия, формат YYYY-MM-DD
+    "declaration": bool,            # Признак декларации
+    "end_date": str,                # *Дата окончания действия, формат YYYY-MM-DD
+    "insurance_program": str,       # Программа страхования
+    "insurance_sum": float,         # Страховая сумма
+    "ipoteka_uuid": str,            # Универсальный идентификатор договора страхования ипотеки
+    "group_id": int,                # Идентификатор группы связанных договоров
+    "no_paper_offer_sent": bool,    # Признак успешной отправки предложения ББ
+    "number": str,                  # Номер договора
+    "offer": bool,                  # Признак оферты
+    "premium_sum": float,           # Сумма премии
+    "prev_insurance_company": str,  # Наименование предыдущей страховой компании
+    "previous_number": str,         # Предыдущий номер договора
+    "risks": [                      # Информация по рискам
         {
-            "insurance_sum": float,     # Страховая сумма
-            "objects": [                # Список объектов / заёмщиков
+            "insurance_sum": float,                     # Страховая сумма
+            "objects": [                                # Список объектов / заёмщиков
                 {
                     "insurance_base_amount": float,     # Страховая сумма
                     "payments": [                       # Платежи
                         {
                             "insurance_sun": float,     # Страховая сумма
-                            "month_in_period": integer, # Количество месяцев в периоде
-                            "period": integer,          # Период
+                            "month_in_period": int,     # Количество месяцев в периоде
+                            "period": int,              # Период
                             "premiumSum": float,        # Сумма премии
                             "tariff": float,            # Тариф
                         },
                     ],  
-                "type": string,                         # Тип объекта
+                "type": str,                            # Тип объекта
                 },
             ],
-            "premium_sum": float,       # Сумма премии
-            "risk_type": string,        # Тип риска
+            "premium_sum": float,                       # Сумма премии
+            "risk_type": str,                           # Тип риска
         },
     ],
-    "sign_date": string,                # *Дата оформления, формат YYYY-MM-DD
+    "sign_date": str,                                   # *Дата оформления, формат YYYY-MM-DD
 }
 ```
 # create_contract
@@ -275,219 +275,219 @@
 ### Загрузка договора ипотеки в КИС
 ### Присваивается номер полиса
 #### Принимает:
-```
+```python
 {
-  "ipoteka_uuid": string,   # Универсальный идентификатор договора страхования ипотеки
+  "ipoteka_uuid": str,      # Универсальный идентификатор договора страхования ипотеки
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-  "begin_date": string,         # Дата начала действия полиса, формат 
-  "contract_number": string,    # Номер договора страхования ипотеки
-  "end_date": string,           # Дата окончания действия полиса
+  "begin_date": str,            # Дата начала действия полиса, формат 
+  "contract_number": str,       # Номер договора страхования ипотеки
+  "end_date": str,              # Дата окончания действия полиса
   "insurance_amount": float,    # Страховая сумма
-  "ipoteka_uuid": string,       # Универсальный идентификатор договора страхования ипотеки
+  "ipoteka_uuid": str,          # Универсальный идентификатор договора страхования ипотеки
   "premium_amount": float,      # Сумма страховой премии
-  "group_id": integer,          # Идентификатор группы связанных договоров
+  "group_id": int,              # Идентификатор группы связанных договоров
 }
 ```
 # get_contract
 [Наверх](#методы)
 ### Получение информации по договору
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
+    "ipoteka_uuid": str,        # Универсальный идентификатор договора страхования ипотеки
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
     "agent": {                              # Информация по агенту
-        "agent_contract_number": string,    # Номер агентского договора
-        "agent_sale_code": string,          # Наименование канала продаж
-        "department_code": string,          # Код подразделения продавца
-        "email": string,                    # Адрес электронной почты для связи с андеррайтерами
-        "manager_name": string,             # Код подразделения продавца
-        "signer_name": string,              # Лицо, подписавшее договор со стороны СК
+        "agent_contract_number": str,       # Номер агентского договора
+        "agent_sale_code": str,             # Наименование канала продаж
+        "department_code": str,             # Код подразделения продавца
+        "email": str,                       # Адрес электронной почты для связи с андеррайтерами
+        "manager_name": str,                # Код подразделения продавца
+        "signer_name": str,                 # Лицо, подписавшее договор со стороны СК
     },
-    "begin_date": string,                   # Дата начала действия договора, формат YYYY-MM-DD HH:MM:SS
+    "begin_date": str,                      # Дата начала действия договора, формат YYYY-MM-DD HH:MM:SS
     "co_insurers": [                        # Блок с данными о созаемщиках
         {
-            "birth_date": string,           # Дата рождения, формат YYYY-MM-DD
-            "email": string,                # email
+            "birth_date": str,              # Дата рождения, формат YYYY-MM-DD
+            "email": str,                   # email
             "fact_address": {               # Данные фактического адреса
-            "fias_id": string,              # Код ФИАС
-            "text": string                  # Полный адрес
-        },
-        "first_name": string,               # Имя
-        "last_name": string,                # Фамилия
+            "fias_id": str,                 # Код ФИАС
+            "text": str                     # Полный адрес
+        },  
+        "first_name": str,                  # Имя
+        "last_name": str,                   # Фамилия
         "life_risk": {                      # Данные о риске по жизни
-            "health": string,               # Категория здоровья согласно справочника
-            "profession": string,           # Категория профессии согласно справочника
+            "health": str,                  # Категория здоровья согласно справочника
+            "profession": str,              # Категория профессии согласно справочника
             "seller_discount": float,       # Коэффициент агента
             "share": float,                 # Доля
-            "sport": string,                # Категория спорта согласно справочника
+            "sport": str,                   # Категория спорта согласно справочника
         },
-        "middle_name": string,              # Отчество
+        "middle_name": str,                 # Отчество
         "passport": {                       # Данные о паспорте
-            "issue_code": string,           # Код подразделения
-            "issue_date": string,           # Дата выдачи паспорта, формат YYYY-MM-DD
-            "issue_place": string,          # Кем выдан
-            "number": string,               # Номер паспорта
+            "issue_code": str,              # Код подразделения
+            "issue_date": str,              # Дата выдачи паспорта, формат YYYY-MM-DD
+            "issue_place": str,             # Кем выдан
+            "number": str,                  # Номер паспорта
             "reg_address": {                # Данные адреса регистрации
-                "fias_id": string,          # Код ФИАС
-                "text": string,             # Полный адрес
+                "fias_id": str,             # Код ФИАС
+                "text": str,                # *Полный адрес
             },
-            "series": string,               # Серия паспорта
+            "series": str,                  # Серия паспорта
         },
-        "phone_number": string,             # Номер телефона
-        "resident": boolean,                # Резидент РФ
-        "sex": string,                      # Пол
-        "snils": string,                    # СНИЛС
+        "phone_number": str,                # Номер телефона
+        "resident": bool,                   # Резидент РФ
+        "sex": str,                         # Пол
+        "snils": str,                       # СНИЛС
         },
     ],
-    "contract_status": string,              # Статус договора
-    "contract_type": string,                # Тип договора, возможны PRIMARY, PROLONGATION
-    "create_date": string,                  # Дата создания договора, формат YYYY-MM-DD
-    "declaration": boolean,                 # Признак декларации
-    "end_date": string,                     # Дата окончания действия договора YYYY-MM-DD
-    "errors": [                             # Блок ошибок по котировке
+    "contract_status": str,             # Статус договора
+    "contract_type": str,               # Тип договора, возможны PRIMARY, PROLONGATION
+    "create_date": str,                 # Дата создания договора, формат YYYY-MM-DD
+    "declaration": bool,                # Признак декларации
+    "end_date": str,                    # Дата окончания действия договора YYYY-MM-DD
+    "errors": [                         # Блок ошибок по котировке
         {
-            "message": string,              # Сообщение по ошибке
+            "message": str,             # Сообщение по ошибке
         },
     ],
-    "group_id": integer,                    # Идентификатор группы связанных договоров
-    "insuranceCity": {                      # Регион / Город объекта страхования
-        "fias_id": string,                  # Код ФИАС
+    "group_id": int,                    # Идентификатор группы связанных договоров
+    "insuranceCity": {                  # Регион / Город объекта страхования
+        "fias_id": str,                 # Код ФИАС
     },
-    "insurance_objects": [                  # Блок с данными об объекте страхования
+    "insurance_objects": [              # Блок с данными об объекте страхования
         {
-            "address": {                    # Данные адреса
-                "fias_id": string,          # Код ФИАС
-                "text": string,             # Полный адрес
+            "address": {                # Данные адреса
+                "fias_id": str,         # Код ФИАС
+                "text": str,            # *Полный адрес
             },
-            "name": string,                         # Наименование объекта
-            "primary_sale": boolean,                # Признак первичной недвижимости
-            "property_risk": {                      # Данные о параметрах риска недвижимости
-                "address": string,                  # Полный адрес объекта страхования
-                "construction_year": integer,       # Год постройки объекта
-                "flammable": boolean,               # Материал стен и перекрытий из горючих материалов
-                "kad_number": string,               # Кадастровый номер объекта
-                "land_category": string,            # Категория земли из справочника
-                "market_price": float,              # Рыночная стоимость объекта
-                "property_area":float,              # Площадь объекта
-                "renovation_work": boolean,         # Признак наличия ремонтных работ на данный момент
-                "seller_discount": float,           # Коэффициент агента
-                "swimming_pool": boolean,           # Наличие бассейна/сауны/джакузи/камина/печи
-                "total_renovation_work": boolean,   # Признак наличия капитальных ремонтных работ/перепланировки
+            "name": str,                        # Наименование объекта
+            "primary_sale": bool,               # *Признак первичной недвижимости
+            "property_risk": {                  # *Данные о параметрах риска недвижимости
+                "address": str,                 # Полный адрес объекта страхования
+                "construction_year": int,       # *Год постройки объекта
+                "flammable": bool,              # *Материал стен и перекрытий из горючих материалов
+                "kad_number": str,              # Кадастровый номер объекта
+                "land_category": str,           # Категория земли из справочника
+                "market_price": float,          # Рыночная стоимость объекта
+                "property_area":float,          # *Площадь объекта
+                "renovation_work": bool,        # *Признак наличия ремонтных работ на данный момент
+                "seller_discount": float,       # Коэффициент агента
+                "swimming_pool": bool,          # Наличие бассейна/сауны/джакузи/камина/печи
+                "total_renovation_work": bool,  # *Наличие капитальных ремонтных работ или перепланировки
             },    
             "title_risk": {                         # Данные о параметрах риска TITLE
-                "address": string,                  # Полный адрес объекта страхования
-                "age_owner": boolean,               # Собственник младше 18 и старше 65 лет
+                "address": str,                     # Полный адрес объекта страхования
+                "age_owner": bool,                  # Собственник младше 18 и старше 65 лет
                 "insurance_base_amount": float,     # Рыночная стоимость
-                "juridical_owner": boolean,         # Признак наличия юридических лиц в собственниках
-                "kad_number": string,               # Кадастровый номер объекта
-                "land_category": string,            # Категория земли из справочника
-                "one_time_payment": boolean,        # Признак единовременной оплаты
-                "ownership_confirmation": string,       # Документ, подтверждающий право собственности
-                "ownership_less_three_years": boolean,  # Наличие в собственности меньше 3 лет
-                "ownership_restriction": string,        # Ограничения на права собственности
-                "procuratory_agreement": boolean,       # Признак проведения сделки по доверенности
-                "seller_discount": float,               # Коэффициент агента
-                "spouse_approval": boolean,             # Признак отсутствия согласия супруга/супруги
-                "term_in_month": integer,               # Срок страхования в месяцах
+                "juridical_owner": bool,            # Признак наличия юридических лиц в собственниках
+                "kad_number": str,                  # Кадастровый номер объекта
+                "land_category": str,               # Категория земли из справочника
+                "one_time_payment": bool,           # Признак единовременной оплаты
+                "ownership_confirmation": str,      # Документ, подтверждающий право собственности
+                "ownership_less_three_years": bool, # Наличие в собственности меньше 3 лет
+                "ownership_restriction": str,       # Ограничения на права собственности
+                "procuratory_agreement": bool,      # Признак проведения сделки по доверенности
+                "seller_discount": float,           # Коэффициент агента
+                "spouse_approval": bool,            # Признак отсутствия согласия супруга/супруги
+                "term_in_month": int,               # Срок страхования в месяцах
             },
-            "type": string,                             # Тип объекта
+            "type": str,                            # Тип объекта
         },
     ],
-    "insurance_program": string,        # Программа страхования
+    "insurance_program": str,           # Программа страхования
     "insurance_sum": float,             # Страховая сумма
     "insurer": {                        # Данные о заемщике
-        "birth_date": string,           # Дата рождения, формат YYYY-MM-DD
-        "email": string,                # Email
+        "birth_date": str,              # Дата рождения, формат YYYY-MM-DD
+        "email": str,                   # Email
         "fact_address": {               # Данные фактического адреса
-            "fias_id": string,          # Код ФИАС
-            "text": string,             # Полный адрес
+            "fias_id": str,             # Код ФИАС
+            "text": str,                # *Полный адрес
         },
-        "first_name": string,           # Имя
-        "last_name": string,            # Фамилия
+        "first_name": str,              # Имя
+        "last_name": str,               # Фамилия
         "life_risk": {                  # Данные о риске по жизни
-            "health": string,           # Категория здоровья согласно справочника
-            "profession": string,       # Категория профессии согласно справочника
+            "health": str,              # Категория здоровья согласно справочника
+            "profession": str,          # Категория профессии согласно справочника
             "seller_discount": float    # Коэффициент агента
             "share": float,             # Доля
-            "sport": string,            # Категория спорта согласно справочника
+            "sport": str,               # Категория спорта согласно справочника
         },
-        "middle_name": string,          # Отчество
+        "middle_name": str,             # Отчество
         "passport": {                   # Данные о паспорте
-            "issue_code": string,       # Код подразделения
-            "issue_date": string,       # Дата выдачи паспорта	
-            "issue_place": string,      # Кем выдан
-            "number": string,           # Номер паспорта
+            "issue_code": str,          # Код подразделения
+            "issue_date": str,          # Дата выдачи паспорта	
+            "issue_place": str,         # Кем выдан
+            "number": str,              # Номер паспорта
             "reg_address": {            # Данные адреса регистрации
-                "fias_id": string,      # Код ФИАС
-                "text": string,         # Полный адрес
+                "fias_id": str,         # Код ФИАС
+                "text": str,            # *Полный адрес
             },
-            "series": string,           # Серия паспорта
+            "series": str,              # Серия паспорта
         },
-        "phone_number": string,         # Номер телефона
-        "resident": boolean,            # Резидент РФ
-        "sex": string,                  # Пол
-        "snils": string,                # СНИЛС
+        "phone_number": str,            # Номер телефона
+        "resident": bool,               # Резидент РФ
+        "sex": str,                     # Пол
+        "snils": str,                   # СНИЛС
     },
-    "ipoteka_uuid": string,             # Универсальный идентификатор договора страхования ипотеки
-    "kv_discount": integer,
+    "ipoteka_uuid": str,                # Универсальный идентификатор договора страхования ипотеки
+    "kv_discount": int,
     "mortgage_agreement": {             # Данные по кредиту
         "amount": float,                # Сумма кредита
-        "bank.bic": string,             # Бик банка
-        "bank.name": string,            # Наименование банка
-        "city": string,                 # Город выдачи кредита
-        "date": string,                 # Дата кредитного договора
-        "number": string,               # Номер кредитного договора
+        "bank.bic": str,                # Бик банка
+        "bank.name": str,               # Наименование банка
+        "city": str,                    # Город выдачи кредита
+        "date": str,                    # Дата кредитного договора
+        "number": str,                  # Номер кредитного договора
         "rate": float,                  # Процентная ставка
-        "term_in_month": integer,       # Оставшийся срок кредита в месяцах
+        "term_in_month": int,           # Оставшийся срок кредита в месяцах
     },
-    "no_paper": boolean,                # Признак ББ
-    "number": string,                   # Номер договора
-    "offer": boolean,                   # Признак оферты
+    "no_paper": bool,                   # Признак ББ
+    "number": str,                      # Номер договора
+    "offer": bool,                      # Признак оферты
     "premium_sum": float,               # Сумма премии
-    "prev_insurance_company": string,   # Наименование предыдущей страховой компании
-    "previous_number": string,          # Предыдущий номер договора (для пролонгации)
+    "prev_insurance_company": str,      # Наименование предыдущей страховой компании
+    "previous_number": str,             # Предыдущий номер договора (для пролонгации)
     "risk_types": [                     # Типы рисков к страхованию
-        string,			
+        str,			
     ],
     "risks": [                          # Риски по договору
         {
             "insurance_sum": float,     # Страховая сумма
             "objects": [                # Список объектов/заёмщиков
                 {
-                    "insurance_base_amount": float,         # Страховая сумма
-                    "object_type": "string",                # Тип объекта
-                    "payments": [                           # Платежи
+                    "insurance_base_amount": float,     # Страховая сумма
+                    "object_type": "str",               # Тип объекта
+                    "payments": [                       # Платежи
                         {
-                            "insurance_sum": float,         # Страховая сумма
-                            "months_in_period": integer,    # Количество месяцев в периоде
-                            "period": integer,              # Период
-                            "premium_sum": float,           # Страховая премия
-                            "tariff": float,                # Тариф
+                            "insurance_sum": float,     # Страховая сумма
+                            "months_in_period": int,    # Количество месяцев в периоде
+                            "period": int,              # Период
+                            "premium_sum": float,       # Страховая премия
+                            "tariff": float,            # Тариф
                         },
                     ]
                 },
             ],
-            "premium_sum": float,           # Страховая премия
-            "risk_type": string,            # Тип риска
-            "underwriter_status": string,   # Статус андеррайтинга по риску
+            "premium_sum": float,       # Страховая премия
+            "risk_type": str,           # Тип риска
+            "underwriter_status": str,  # Статус андеррайтинга по риску
         },
     ],
-    "sign_date": string,                    # Дата оформления, формат YYYY-MM-DD HH:MM:SS
-    "underwriter_status": string,           # Статус андеррайтинга по котировке
-    "underwriting_сomments": [              # Комментарии андеррайтеров
+    "sign_date": str,                   # Дата оформления, формат YYYY-MM-DD HH:MM:SS
+    "underwriter_status": str,          # Статус андеррайтинга по котировке
+    "underwriting_сomments": [          # Комментарии андеррайтеров
         {
-            "date": string,                 # Дата комментрация, формат YYYY-MM-DD HH:MM:SS
-            "message": string,              # Комментарий
-            "username": string,             # Имя пользователя
+            "date": str,                # Дата комментрация, формат YYYY-MM-DD HH:MM:SS
+            "message": str,             # Комментарий
+            "username": str,            # Имя пользователя
         },
     ]
 }
@@ -496,9 +496,9 @@
 [Наверх](#методы)
 ### Получение данных по группе договоров ипотечного страхования
 #### Принимает:
-```
+```python
 {
-    "group_id": string,     # Универсальный идентификатор группы договоров
+    "group_id": str,    # Универсальный идентификатор группы договоров
 }
 ```
 #### Успешный ответ:
@@ -509,17 +509,17 @@
 [Наверх](#методы)
 ### Получение списка доступных печатных форм для договора
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
+    "ipoteka_uuid": str,    # Универсальный идентификатор договора страхования ипотеки
 }
 ```
 #### Успешный ответ:
-```
+```python
 [
     {
-        "form_id": string,      # Идентификатор печатной формы
-        "form_name": string,    # Название печатной формы
+        "form_id": str,     # Идентификатор печатной формы
+        "form_name": str,   # Название печатной формы
     },
 ]
 ```
@@ -527,56 +527,56 @@
 [Наверх](#методы)
 ### Получение печатной формы
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
-    "form_id": string,          # Идентификатор печатной формы
+    "ipoteka_uuid": str,    # Универсальный идентификатор договора страхования ипотеки
+    "form_id": str,         # Идентификатор печатной формы
 }
 ```
 #### Успешный ответ:
-```
-string($byte)                   # Байтовый массив содержащий документ
+```python
+str($byte)                  # Байтовый массив содержащий документ
 ```
 # payment
 [Наверх](#методы)
 ### Регистрация заказа на оплату
 ### Вначале нужно вызвать 'create_contract'
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,         # *Универсальный идентификатор договора страхования ипотеки
-    "bill_enabled": boolean,        # Признак оплаты по счету, по умолчанию False
-    "statement_file_Id": integer,   # id вложенного заявления. Если на расчете declaration = False
-    "contacts": {                   # *Контакты клиента
-        "email": string,            # Адрес электронной почты для отправки ссылки на оплату договора
-        "phone": string,            # *Номер телефона для отправки ссылки на оплату договора
+    "ipoteka_uuid": str,        # *Универсальный идентификатор договора страхования ипотеки
+    "bill_enabled": bool,       # Признак оплаты по счету, по умолчанию False
+    "statement_file_Id": int,   # id вложенного заявления. Если на расчете declaration = False
+    "contacts": {               # *Контакты клиента
+        "email": str,           # Адрес электронной почты для отправки ссылки на оплату договора
+        "phone": str,           # *Номер телефона для отправки ссылки на оплату договора
     },
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-    "ipoteka_uuid": string,     # *Универсальный идентификатор договора страхования ипотеки
+    "ipoteka_uuid": str,        # *Универсальный идентификатор договора страхования ипотеки
 }
 ```
 # files
 [Наверх](#методы)
 ### Получение списка вложенных файлов
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # *Универсальный идентификатор договора страхования ипотеки
+    "ipoteka_uuid": str,        # *Универсальный идентификатор договора страхования ипотеки
 }
 ```
 #### Успешный ответ:
-```
+```python
 [
   {
-    "createTime": string,       # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-    "id": integer,              # Идентификатор загруженного файла
-    "modifyTime": string,       # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-    "name": string,             # Наименование загруженного файла
-    "type": string,             # Тип загруженного документа
+    "createTime": str,  # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+    "id": int,          # Идентификатор загруженного файла
+    "modifyTime": str,  # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+    "name": str,        # Наименование загруженного файла
+    "type": str,        # Тип загруженного документа
   },
 ]
 ```
@@ -584,21 +584,21 @@ string($byte)                   # Байтовый массив содержащ
 [Наверх](#методы)
 ### Загрузка сопроводительных документов к договору страхования ипотеки
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # *Универсальный идентификатор договора страхования ипотеки
-    "type": string,             # *Тип документа
-    "file": file,               # *Сам файл
+    "ipoteka_uuid": str,    # *Универсальный идентификатор договора страхования ипотеки
+    "type": str,            # *Тип документа
+    "file": file,           # *Сам файл
 }
 ```
 #### Успешный ответ:
-```
+```python
 [
     {
-        "createTime": string,   # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-        "id": integer,          # Идентификатор загруженного файла
-        "modifyTime": string,   # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-        "name": "string"        # Наименование загруженного файла
+        "createTime": str,  # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+        "id": int,          # Идентификатор загруженного файла
+        "modifyTime": str,  # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+        "name": str,        # Наименование загруженного файла
     },
 ]
 ```
@@ -606,32 +606,32 @@ string($byte)                   # Байтовый массив содержащ
 [Наверх](#методы)
 ### Получение вложенного файла к договору страхования ипотеки
 #### Принимает:
-```
+```python
 { 
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
-    "file_id": string,          # Идентификатор загруженного файла
+    "ipoteka_uuid": str,    # Универсальный идентификатор договора страхования ипотеки
+    "file_id": str,         # Идентификатор загруженного файла
 }
 ```
 #### Успешный ответ:
-```
-string($byte)                   # Байтовый массив содержащий документ
+```python
+str($byte)                  # Байтовый массив содержащий документ
 ```
 # under_docs_info
 [Наверх](#методы)
 ### Получение списка требуемых документов, необходимых для оформления договора страхования ипотеки
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
+    "ipoteka_uuid": str,    # Универсальный идентификатор договора страхования ипотеки
 }
 ```
 #### Успешный ответ:
-```
+```python
 [
     {
-        "code": string,         # Тип документа
-        "description": string,  # Текстовое описание
-        "loaded": boolean,      # Признак того, что документ уже загружен
+        "code": str,        # Тип документа
+        "description": str, # Текстовое описание
+        "loaded": bool,     # Признак того, что документ уже загружен
     },
 ]
 ```
@@ -639,26 +639,26 @@ string($byte)                   # Байтовый массив содержащ
 [Наверх](#методы)
 ### Отправка на андеррайтинг
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор договора страхования ипотеки
-    "message": string,          # Комментарий 
+    "ipoteka_uuid": str,    # Универсальный идентификатор договора страхования ипотеки
+    "message": str,         # Комментарий 
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-    "risks": [                              # Список рисков
+    "risks": [                          # Список рисков
         {
-            "riskType": string,             # Тип риска
-            "underwriterStatus": string,    # Статус андеррайтинга
+            "riskType": str,            # Тип риска
+            "underwriterStatus": str,   # Статус андеррайтинга
         },
     ],
-    "underwriterStatus": string,            # Статус андеррайтинга
-    "underwritingComments": [               # Комментарии по андеррайтингу
+    "underwriterStatus": str,           # Статус андеррайтинга
+    "underwritingComments": [           # Комментарии по андеррайтингу
         {
-            "date": string,                 # Дата и время комментария, формат DD-MM-YYYY HH:MM:SS
-            "message": string,              # Комментарий
+            "date": str,                # Дата и время комментария, формат DD-MM-YYYY HH:MM:SS
+            "message": str,             # Комментарий
         },
     ],
 }
@@ -667,16 +667,16 @@ string($byte)                   # Байтовый массив содержащ
 [Наверх](#методы)
 ### Справочники
 #### Принимает:
-```
+```python
 {
-    "type": string,     # тип справочника
+    "type": str,        # тип справочника
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
     "values": [         # массив строк
-        string,				
+        str,				
     ],
 }
 ```
@@ -685,17 +685,17 @@ string($byte)                   # Байтовый массив содержащ
 ### Получение ссылки на страницу лендинка
 ### Требуется доп.согласование куратора
 #### Принимает:
-```
+```python
 {
-    "ipoteka_uuid": string,     # Универсальный идентификатор котировки ипотечного договора
-    "bill_enabled": boolean,    # Признак оплаты по счету
-    "token": string,            # Токен для получения ссылки на страницу лендинга
+    "ipoteka_uuid": str,    # Универсальный идентификатор котировки ипотечного договора
+    "bill_enabled": bool,   # Признак оплаты по счету
+    "token": str,           # Токен для получения ссылки на страницу лендинга
 }
 ```
 #### Успешный ответ:
-```
+```python
 {
-    "url": string,              # Ссылки на страницу лендинга
+    "url": str,             # Ссылки на страницу лендинга
 }
 ```
 # Доступные справочники

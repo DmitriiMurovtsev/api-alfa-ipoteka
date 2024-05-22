@@ -3,14 +3,14 @@ import json
 from app import app
 
 
-login = "login"             # логин
-password = "password"       # пароль для тестовой среды
+login = "LONDORENKOMV"             # логин
+password = "A4oXjGx2"       # пароль для тестовой среды
 
-agent_contract_id = 0       # id агентского договора
-channel_sale_id = 0         # id канала продаж
-department_id = 0           # id подразделения
-manager_id = 0              # id менеджера
-signer_id = 0               # id подписанта
+agent_contract_id = 7304803       # id агентского договора
+channel_sale_id = 20075         # id канала продаж
+department_id = 53224154           # id подразделения
+manager_id = 638193450              # id менеджера
+signer_id = 500644077               # id подписанта
 
 
 # тест предварительного расчета
@@ -91,17 +91,17 @@ def test_calculation():
                 "name": "Квартира",
                 "primary_sale": False,
                 "property_risk": {
-                    "address": "г Волгоград, пр-кт им. В.И. Ленина, д 72б, кв 1",
+                    # "address": "г Волгоград, пр-кт им. В.И. Ленина, д 72б, кв 1",
                     "construction_year": 2020,
                     "flammable": False,
-                    "building_type": "Комбинированный",
-                    "kad_number": "34:34:040010:1156",
-                    "land_category": "Земли нас.пунктов (поселений)",
-                    "market_price": 3200000,
+                    # "building_type": "Комбинированный",
+                    # "kad_number": "34:34:040010:1156",
+                    # "land_category": "Земли нас.пунктов (поселений)",
+                    # "market_price": 3200000,
                     "property_area": 35.5,
                     "renovation_work": False,
-                    "seller_discount": "1",
-                    "swimming_pool": False,
+                    # "seller_discount": "1",
+                    # "swimming_pool": False,
                     "total_renovation_work": False,
                 },
                 "title_risk": {
