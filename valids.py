@@ -413,3 +413,11 @@ class ToUnderwriterValidator(BaseModel):
 class DictionaryValidator(BaseModel):
     auth: Auth
     type: TypeDictionaryEnum
+    
+
+# Валидатор для /landing_offer
+class LandingOfferValidator(BaseModel):
+    auth: Auth
+    ipoteka_uuid: str
+    bill_enabled: bool = False
+    token: str

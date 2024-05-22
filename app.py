@@ -25,6 +25,7 @@ from valids import (
     UnderDocsInfoValidator,
     ToUnderwriterValidator,
     DictionaryValidator,    
+    LandingOfferValidator,
 )
 
 
@@ -536,16 +537,29 @@ def dictionary():
 @request_response_logging
 def landing_offer():
     
-    return jsonify({
-        "info": "Ошибка при получении ссылки на страницу лендинга",
-        "session_id": None,
-        "sub_errors": [
-            {
-                "message": "Требуется согласование доступа куратором",
-            }
-        ],
-        "timestamp": datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    }), 200
+    is_valid, request_data, errors = validation_of_input_data(request, LandingOfferValidator)
+    if not is_valid:
+        return jsonify(errors), 400
+    
+    ipoteka_uuid = request_data["ipoteka_uuid"]
+    token = request_data["ipoteka_uuid"]
+    
+    request_data, login, password = get_auth(request_data)    
+    
+    data = {
+        "bill_enabled": request_data["bill_enabled"],
+    }
+    
+    response = requests.post(
+        f"{link_api}/landing-offer/{ipoteka_uuid}",
+        auth=HTTPDigestAuth(login, password),
+        json=data,
+        headers={"Token": token}
+    )  
+        
+    response_data, status_code = handle_response_errors(response, [400, 403, 404, 500])
+    
+    return jsonify(response_data), status_code
 
 
 if __name__ == "__main__":
