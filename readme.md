@@ -595,10 +595,10 @@ string($byte)                   # Байтовый массив содержащ
 ```
 [
     {
-        "createTime": "2024-05-16T08:58:58.160Z",       # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-        "id": 0,                                        # Идентификатор загруженного файла
-        "modifyTime": "2024-05-16T08:58:58.160Z",       # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
-        "name": "string"                                # Наименование загруженного файла
+        "createTime": string,   # Дата добавления, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+        "id": integer,          # Идентификатор загруженного файла
+        "modifyTime": string,   # Дата изменения, формат YYYY-MM-DDTHH:MM:SS.SSSZ
+        "name": "string"        # Наименование загруженного файла
     },
 ]
 ```
