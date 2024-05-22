@@ -3,14 +3,14 @@ import json
 from app import app
 
 
-login = "LONDORENKOMV"             # логин
-password = "A4oXjGx2"       # пароль для тестовой среды
+login = "login"             # логин
+password = "password"       # пароль для тестовой среды
 
-agent_contract_id = 7304803       # id агентского договора
-channel_sale_id = 20075         # id канала продаж
-department_id = 53224154           # id подразделения
-manager_id = 638193450              # id менеджера
-signer_id = 500644077               # id подписанта
+agent_contract_id = 0       # id агентского договора
+channel_sale_id = 0         # id канала продаж
+department_id = 0           # id подразделения
+manager_id = 0              # id менеджера
+signer_id = 0               # id подписанта
 
 
 # тест предварительного расчета
