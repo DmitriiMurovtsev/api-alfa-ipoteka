@@ -231,6 +231,44 @@
 ```
 #### Успешный ответ:
 ```
+{
+    "begin_date": string,               # *Дата начала действия, формат YYYY-MM-DD
+    "declaration": boolean,             # Признак декларации
+    "end_date": string,                 # *Дата окончания действия, формат YYYY-MM-DD
+    "insurance_program": string,        # Программа страхования
+    "insurance_sum": float,             # Страховая сумма
+    "ipoteka_uuid": string,             # Универсальный идентификатор договора страхования ипотеки
+    "group_id": integer,                # Идентификатор группы связанных договоров
+    "no_paper_offer_sent": boolean,     # Признак успешной отправки предложения ББ
+    "number": string,                   # Номер договора
+    "offer": boolean,                   # Признак оферты
+    "premium_sum": float,               # Сумма премии
+    "prev_insurance_company": string,   # Наименование предыдущей страховой компании
+    "previous_number": string,          # Предыдущий номер договора
+    "risks": [                          # Информация по рискам
+        {
+            "insurance_sum": float,     # Страховая сумма
+            "objects": [                # Список объектов / заёмщиков
+                {
+                    "insurance_base_amount": float,     # Страховая сумма
+                    "payments": [                       # Платежи
+                        {
+                            "insurance_sun": float,     # Страховая сумма
+                            "month_in_period": integer, # Количество месяцев в периоде
+                            "period": integer,          # Период
+                            "premiumSum": float,        # Сумма премии
+                            "tariff": float,            # Тариф
+                        },
+                    ],  
+                "type": string,                         # Тип объекта
+                },
+            ],
+            "premium_sum": float,       # Сумма премии
+            "risk_type": string,        # Тип риска
+        },
+    ],
+    "sign_date": string,                # *Дата оформления, формат YYYY-MM-DD
+}
 ```
 # create_contract
 [Наверх](#методы)
